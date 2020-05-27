@@ -1,0 +1,24 @@
+{
+  "name": "srapi",
+  "version": "1.0.0",
+  "description": "API for Szkola Reacta",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szkola-reacta/srapi.git"
+  },
+  "keywords": [
+    "API",
+    "Express",
+    "Node.js"
+  ],
+  "author": "Patryk Omiotek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szkola-reacta/srapi/issues"
+  },
+  "homepage": "https://github.com/szkola-reacta/srapi#readme"
+}
