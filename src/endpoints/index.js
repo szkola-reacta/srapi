@@ -4,13 +4,13 @@ const swaggerDocument = require('../doc/swagger.json');
 const API_VERSION = 'v1';
 
 const moviesRoutes = require('./movies/routes');
-// const eventsRoutes = require('./events/event.routes');
-// const placesRoutes = require('./places/place.routes');
+const eventsRoutes = require('./events/routes');
+const placesRoutes = require('./places/routes');
 
 module.exports = app => {
   app.use(`/${API_VERSION}/movies`, moviesRoutes);
-  // app.use('/api/v1/events', eventsRoutes);
-  // app.use('/api/v1/places', placesRoutes);
+  app.use(`/${API_VERSION}/events`, eventsRoutes);
+  app.use(`/${API_VERSION}/places`, placesRoutes);
 
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 };
