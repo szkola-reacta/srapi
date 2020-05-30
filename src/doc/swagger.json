@@ -15,15 +15,15 @@
   "basePath": "/v1",
   "tags": [
     {
-      "name": "Movies",
+      "name": "movies",
       "description": "API for movies"
     },
     {
-      "name": "Events",
+      "name": "events",
       "description": "API for events"
     },
     {
-      "name": "Places",
+      "name": "places",
       "description": "API for places"
     }
   ],
@@ -40,7 +40,7 @@
     "/movies": {
       "post": {
         "tags": [
-          "Movies"
+          "movies"
         ],
         "summary": "Create new movie",
         "parameters": [
@@ -57,20 +57,20 @@
           "application/json"
         ],
         "responses": {
-          "202": {
+          "201": {
             "description": "New movie was created",
             "schema": {
               "$ref": "#/definitions/Movie"
             }
           },
-          "401": {
+          "400": {
             "description": "Bad request"
           }
         }
       },
       "get": {
         "tags": [
-          "Movies"
+          "movies"
         ],
         "summary": "Get all movies",
         "responses": {
@@ -79,6 +79,9 @@
             "schema": {
               "$ref": "#/definitions/Movies"
             }
+          },
+          "400": {
+            "description": "Bad request"
           }
         }
       }
@@ -95,7 +98,7 @@
       ],
       "get": {
         "tags": [
-          "Movies"
+          "movies"
         ],
         "summary": "Get movie with given ID",
         "responses": {
@@ -104,27 +107,39 @@
             "schema": {
               "$ref": "#/definitions/Movie"
             }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
           }
         }
       },
       "delete": {
         "summary": "Movie with given ID",
         "tags": [
-          "Movies"
+          "movies"
         ],
         "responses": {
           "200": {
             "description": "Movie was deleted",
             "schema": {
-              "$ref": "#/definitions/Movie"
+              "$ref": "#/definitions/Empty"
             }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
           }
         }
       },
       "patch": {
         "summary": "Update movie with given ID",
         "tags": [
-          "Movies"
+          "movies"
         ],
         "parameters": [
           {
@@ -142,17 +157,28 @@
             "schema": {
               "$ref": "#/definitions/Movie"
             }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
           }
         }
       }
     }
   },
   "definitions": {
+    "Empty": {
+      "properties": {
+
+      }
+    },
     "Movie": {
       "required": [
         "title",
         "description",
-        "id"
+        "video_url"
       ],
       "properties": {
         "id": {
@@ -160,10 +186,12 @@
           "uniqueItems": true
         },
         "title": {
-          "type": "string",
-          "uniqueItems": true
+          "type": "string"
         },
         "description": {
+          "type": "string"
+        },
+        "video_url": {
           "type": "string"
         }
       }

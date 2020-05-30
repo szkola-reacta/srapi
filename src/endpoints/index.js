@@ -12,5 +12,5 @@ module.exports = app => {
   // app.use('/api/v1/events', eventsRoutes);
   // app.use('/api/v1/places', placesRoutes);
 
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 };
