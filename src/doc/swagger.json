@@ -28,7 +28,7 @@
     }
   ],
   "schemes": [
-    "https"
+    "http"
   ],
   "consumes": [
     "application/json"
@@ -166,6 +166,266 @@
           }
         }
       }
+    },
+    "/events": {
+      "post": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Create new event",
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "Event that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "New event was created",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get all events",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Events"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/events/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of event we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get event with given ID",
+        "responses": {
+          "200": {
+            "description": "Event is found",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Event with given ID",
+        "tags": [
+          "events"
+        ],
+        "responses": {
+          "200": {
+            "description": "Event was deleted",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update event with given ID",
+        "tags": [
+          "events"
+        ],
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "Event with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event was updated",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/places": {
+      "post": {
+        "tags": [
+          "places"
+        ],
+        "summary": "Create new place",
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "Place that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Place"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "New place was created",
+            "schema": {
+              "$ref": "#/definitions/Place"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "places"
+        ],
+        "summary": "Get all places",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Places"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/places/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of place we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "places"
+        ],
+        "summary": "Get place with given ID",
+        "responses": {
+          "200": {
+            "description": "Place is found",
+            "schema": {
+              "$ref": "#/definitions/Place"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Place with given ID",
+        "tags": [
+          "places"
+        ],
+        "responses": {
+          "200": {
+            "description": "Place was deleted",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update place with given ID",
+        "tags": [
+          "places"
+        ],
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "Place with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Place"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Place was updated",
+            "schema": {
+              "$ref": "#/definitions/Place"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -199,6 +459,94 @@
     "Movies": {
       "type": "array",
       "$ref": "#/definitions/Movie"
+    },
+    "Event": {
+      "required": [
+        "title",
+        "description",
+        "price",
+        "city",
+        "category",
+        "date"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "cover_url": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "city": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "hour": {
+          "type": "integer"
+        }
+      }
+    },
+    "Events": {
+      "type": "array",
+      "$ref": "#/definitions/Event"
+    },
+    "Place": {
+      "required": [
+        "title",
+        "description",
+        "price",
+        "city",
+        "category",
+        "date"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "foto_url": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "city": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "Places": {
+      "type": "array",
+      "$ref": "#/definitions/Place"
     }
   }
 }
