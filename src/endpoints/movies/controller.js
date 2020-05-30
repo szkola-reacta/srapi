@@ -45,7 +45,10 @@ exports.getList = async (req, res) => {
     const values = snapshot.val();
     const entries = Object.entries(values);
     const results = [];
-    entries.forEach(elem => results.push(elem[1]));
+    entries.forEach(elem => results.push({
+      id: elem[0],
+      ...elem[1]
+    }));
 
     return res.status(HTTPStatus.OK).json(results);
   } catch (e) {
