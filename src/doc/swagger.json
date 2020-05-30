@@ -1,0 +1,176 @@
+
+
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Szkola Reacta API",
+    "description": "Szkola Reacta endpoints",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "api.szkolareacta.pl",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "Movies",
+      "description": "API for movies"
+    },
+    {
+      "name": "Events",
+      "description": "API for events"
+    },
+    {
+      "name": "Places",
+      "description": "API for places"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/movies": {
+      "post": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Create new movie",
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "Movie that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "New movie was created",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          },
+          "401": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Get all movies",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Movies"
+            }
+          }
+        }
+      }
+    },
+    "/movies/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of movie we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Get movie with given ID",
+        "responses": {
+          "200": {
+            "description": "Movie is found",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Movie with given ID",
+        "tags": [
+          "Movies"
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie was deleted",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update movie with given ID",
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "Movie with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie was updated",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Movie": {
+      "required": [
+        "title",
+        "description",
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "title": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Movies": {
+      "type": "array",
+      "$ref": "#/definitions/Movie"
+    }
+  }
+}

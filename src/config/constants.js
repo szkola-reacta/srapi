@@ -1,11 +1,11 @@
 const devConfig = {
-  API_URL: process.env.API_URL,
+
 };
 const testConfig = {
-  API_URL: process.env.API_URL,
+
 };
 const prodConfig = {
-  API_URL: process.env.API_URL,
+
 };
 
 const defaultConfig = {
