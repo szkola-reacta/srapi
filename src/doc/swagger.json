@@ -1,5 +1,3 @@
-
-
 {
   "swagger": "2.0",
   "info": {
@@ -15,16 +13,20 @@
   "basePath": "/v1",
   "tags": [
     {
+      "name": "auth",
+      "description": "endpoints for auth"
+    },
+    {
       "name": "movies",
-      "description": "API for movies"
+      "description": "endpoints for movies"
     },
     {
       "name": "events",
-      "description": "API for events"
+      "description": "endpoints for events"
     },
     {
       "name": "places",
-      "description": "API for places"
+      "description": "endpoints for places"
     }
   ],
   "schemes": [
@@ -37,6 +39,101 @@
     "application/json"
   ],
   "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login to the app",
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "Movie that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "invalid credentials"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/auth/validate-token": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Validate user token",
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "Movie that we want to create",
+            "schema": {
+              "$ref": "#/definitions/LoginToken"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "invalid credentials"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/auth/protected": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Endpoint protected by token",
+        "parameters": [
+          {
+            "name": "X-Access-Token",
+            "description": "header with token value",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "invalid credentials"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
     "/movies": {
       "post": {
         "tags": [
@@ -547,6 +644,31 @@
     "Places": {
       "type": "array",
       "$ref": "#/definitions/Place"
+    },
+    "Login": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginToken": {
+      "required": [
+        "token"
+      ],
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
     }
   }
 }
