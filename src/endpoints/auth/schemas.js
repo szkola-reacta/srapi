@@ -7,6 +7,9 @@ const schemas = {
   }),
   logout: Joi.object().keys({
     token: Joi.string().required()
+  }),
+  validateToken: Joi.object().keys({
+    token: Joi.string().required()
   })
 };
 
