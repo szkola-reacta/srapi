@@ -1,5 +1,6 @@
 // Validate middleware pod Express and Joi
 const Joi = require('joi');
+const HTTPStatus = require('http-status');
 
 const middleware = (schema) => {
   return (req, res, next) => {
@@ -12,8 +13,8 @@ const middleware = (schema) => {
     const { details } = error;
     const message = details.map(i => i.message).join(',');
 
-    console.log("error", message);
-    res.status(422).json({ error: message }) };
+    console.log('error', message);
+    res.status(HTTPStatus.BAD_REQUEST).json({ error: message }) };
   }
 }
 
