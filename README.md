@@ -10,5 +10,9 @@ Instructions how to run this application using your own database:
 1. Run: `npm run dev`
 1. Enjoy happy development at [http://localhost:3000](http://localhost:3000) :)
 
+# Fake user credentials
+Provide credentials for simulate user auth in consts
+`FAKE_USER_EMAIL` and `FAKE_USER_PASSWORD` and `JWT_SECRET`.
+
 ## API Documentation
 You can find API documentation under path [/docs](http://localhost:3000/docs)

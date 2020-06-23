@@ -3,11 +3,13 @@ const swaggerDocument = require('../doc/swagger.json');
 
 const API_VERSION = 'v1';
 
+const authRoutes = require('./auth/routes');
 const moviesRoutes = require('./movies/routes');
 const eventsRoutes = require('./events/routes');
 const placesRoutes = require('./places/routes');
 
 module.exports = app => {
+  app.use(`/${API_VERSION}/auth`, authRoutes);
   app.use(`/${API_VERSION}/movies`, moviesRoutes);
   app.use(`/${API_VERSION}/events`, eventsRoutes);
   app.use(`/${API_VERSION}/places`, placesRoutes);
