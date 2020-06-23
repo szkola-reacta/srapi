@@ -33,6 +33,8 @@ exports.login = async (req, res) => {
     if (user) {
       const secret = process.env.JWT_SECRET;
       const token = jwt.sign({ id: user.id }, secret);
+      // token with expiration time
+      // const token = jwt.sign({ id: user.id }, secret, { expiresIn: 60 * 60 });
       return res.status(HTTPStatus.OK).set({
         [constants.TOKEN_HEADER]: token
       }).json(user);
