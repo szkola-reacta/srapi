@@ -10,7 +10,7 @@ const prodConfig = {
 
 const defaultConfig = {
   PORT: process.env.PORT || 3000,
-  TOKEN_HEADER: 'X-Access-Token'
+  TOKEN_HEADER: 'x-access-token'
 };
 
 const envConfig = (env) => {

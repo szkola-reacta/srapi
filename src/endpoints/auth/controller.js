@@ -35,9 +35,12 @@ exports.login = async (req, res) => {
       const token = jwt.sign({ id: user.id }, secret);
       // token with expiration time
       // const token = jwt.sign({ id: user.id }, secret, { expiresIn: 60 * 60 });
-      return res.status(HTTPStatus.OK).set({
-        [constants.TOKEN_HEADER]: token
-      }).json(user);
+      // with custom header
+      // return res.status(HTTPStatus.OK).set({
+      //   [constants.TOKEN_HEADER]: token
+      // }).json(user);
+      return res.status(HTTPStatus.OK).json({ ...user, token });
+
     } else {
       return res.status(HTTPStatus.FORBIDDEN).json({});
     }
