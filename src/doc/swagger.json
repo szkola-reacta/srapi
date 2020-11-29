@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:3000",
+  "host": "http://srapi.herokuapp.com",
   "basePath": "/v1",
   "tags": [
     {
